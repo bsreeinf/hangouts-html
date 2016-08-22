@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+	<title></title>
+	<link rel="stylesheet" href="css/slides/normalize.css" />
+	<link rel="stylesheet" href="css/slides/animate.css" />
+	<link rel="stylesheet" href="css/slides/glide.css" />
+	<link rel="stylesheet" href="css/slides/style.css" />
+</head>
+<body>
+	<section class="content slider">
+		<section class="content-wrapper slides">
+			<article class="content_article content_article--fast slide">
+				<div class="content_article-wrapper content_article-img animated fadeInUpBig">
+					<h1 class="content_article-h">Gravity</h1>
+					<p class="content_article-p">
+						Enjoy a night out with drinks to match and view that intoxicate.
+					</p>
+					<!--<div class="content_article-btns">
+						<a class="content_article-btn header_nav-item-a header_nav-item-a--btn" href="#" target="_blank">
+							<span class="entypo-download"></span> Minifed
+						</a>
+						<a class="content_article-btn header_nav-item-a header_nav-item-a--btn" href="#" target="_blank">Source</a>
+					</div>
+					<img class="content_article-img box-shadow animated fadeInUpBig" src="img/slides/fast-img.png" alt="Glide.js - Ultra efficient CSS3 transitions & transforms">-->
+				</div>
+			</article>
+		<!--	<article class="content_article content_article--simple slide">
+				<div class="content_article-wrapper content_article-img animated fadeInUpBig">
+					<h1 class="content_article-h animated fadeInUpBig">Quality of Coffee</h1>
+					<p class="content_article-p animated fadeInUpBig">
+						Delight in freshly brewed aromatic coffee or do brunch in brightly lit spaces.
+					</p>
+					
+				</div>
+			</article>-->
+			<article class="content_article content_article--responsive  slide">
+				<div class="content_article-wrapper content_article-img animated fadeInUpBig">
+					<h1 class="content_article-h animated fadeInUpBig">Comfortable Environment</h1>
+					<p class="content_article-p animated fadeInUpBig">
+						Relax in the opulent embrace of HangoutOn20Preston where luxury meets sophisticated style.
+					</p>
+					
+				</div>
+			</article>
+		</section>
+	</section>
+
+
+
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="js/slides/jquery.glide.min.js"></script>
+	<script>
+
+		var slides = $('.content_article-img');
+
+		var glide = $('.slider').glide({
+			arrowRightText: '',
+			arrowLeftText: '',
+			autoplay: 7000,
+			circular: false,
+			beforeTransition: function() {
+				$(slides).eq(-this.currentSlide).removeClass('fadeInUpBig').addClass('fadeOutDownBig');
+
+			},
+			afterTransition: function() {
+				$(slides).eq(-this.currentSlide).removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+			}
+		});
+	</script>
+	
+</body>
+</html>

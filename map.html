@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Map - Hangout 20 Preston </title>
+<style>
+html, body, #map-canvas {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+}
+/**
+.gm-style > div > div > div > div,
+.gm-style > div > div > div > div > div {
+    background: #333333;
+    color: #cfcfcf;
+}
+.gm-style a {color: #fff; text-decoration: none;}
+.gm-style h2 {
+    background: rgba(255,255,255,0.07);
+    text-align: left;
+    padding: 30px 55px;
+    -webkit-margin-before: 0 !important;
+    -webkit-margin-after: 0 !important;
+}
+.gm-style p {
+    padding-left: 55px;
+    
+}
+.gm-style p:nth-child(1){
+    padding-top: 20px;
+}
+.gm-style p:nth-child(2){
+    padding-bottom: 20px;
+}
+.gm-style .gm-style-iw div {
+    width: 100% !important;
+}
+.gm-style .gm-style-iw {
+    height: 400px !important;
+    width: 300px !important;
+    top: 0 !important;
+    left: 0 !important;
+}**/
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+var map;
+var gurney = new google.maps.LatLng(-31.9934829,115.8587992);
+
+function initialize() {
+
+  var roadAtlasStyles = [
+    {
+      featureType: 'landscape',
+      elementType: 'geometry',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 29. },
+        { saturation: -100 },
+        { gamma: 1.0 }
+      ]
+    },{
+      featureType: 'road.highway',
+      elementType: 'geometry',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 17 },
+        { saturation: -100 },
+        { gamma: 1.0 }
+      ]
+    },{
+      featureType: 'road.arterial',
+      elementType: 'all',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 51.1 },
+        { saturation: -100 },
+        { gamma: 1.0 },
+        { visibility: 'simplified' }
+      ]
+    },{
+      featureType: 'road.local',
+      elementType: 'all',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 52 },
+        { saturation: -100 },
+        { gamma: 1.0 },
+        { visibility: 'simplified' }
+      ]
+    },{
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 19 },
+        { saturation: -100 },
+        { gamma: 1.0 }
+      ]
+    },{
+      featureType: 'poi',
+      elementType: 'geometry',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 23 },
+        { saturation: -100 },
+        { gamma: 1.0 },
+        { visibility: 'on' }
+      ]
+    },{
+      featureType: 'road.highway',
+      elementType: 'labels',
+      stylers: [
+        { hue: '#ff0300' },
+        { saturation: -100 },
+        { gamma: 1.0 },
+        { visibility: 'on' }
+      ]
+    },{
+      featureType: 'administrative.locality',
+      elementType: 'labels',
+      stylers: [
+        { hue: '#ff0300' },
+        { lightness: 17 },
+        { saturation: -100 },
+        { gamma: 1.0 }
+      ]
+    }
+  ];
+
+  var mapOptions = {
+    zoom: 18,
+    scrollwheel: false,
+    center: new google.maps.LatLng(-31.993474, 115.858764),
+    mapTypeControlOptions: {
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var locations = [
+        ['<h2>Hangout Bar N Cafe</h2><p>20 Preston Street, Como WA 6152, Australia</p><p>+604 238 0000<br> <a href="mailto:hangouton20preston@gmail.com">hangouton20preston@gmail.com</a></p>', -31.993474, 115.858764,'img/marker.png']
+        
+    ];
+//declare marker call it 'i'
+  var marker, i;
+
+  var infowindow = new google.maps.InfoWindow();
+    //add marker to each locations
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                icon: locations[i][3]
+        });
+
+        //click function to marker, pops up infowindow
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
+
+  //google.maps.event.addListener(marker, 'click', function() {
+    //infowindow.open(map,marker);
+  //});
+  //infowindow.open(map,marker);
+
+  var styledMapOptions = {
+    name: 'gurney'
+  };
+
+  var usRoadMapType = new google.maps.StyledMapType(
+      roadAtlasStyles, styledMapOptions);
+
+  map.mapTypes.set('usroadatlas', usRoadMapType);
+  map.setMapTypeId('usroadatlas');  
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+</head>
+<body>
+    <div id="map-canvas"></div>
+</body>
+</html>
